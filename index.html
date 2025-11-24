@@ -1,159 +1,293 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ibero MyIdentity Portal</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ibero | MyIdentity</title>
   <style>
     :root{
-      --bg:#0b1220;
-      --card:#0f172a;
-      --text:#e5e7eb;
-      --muted:#9ca3af;
-      --accent:#22c55e;
-      --accent2:#60a5fa;
-      --danger:#f59e0b;
-      --ring:rgba(96,165,250,.35);
-      font-synthesis: style;
+      --bg: #0b1020;
+      --bg-soft:#121833;
+      --card:#0f1730;
+      --card-2:#111c3d;
+      --stroke:rgba(255,255,255,.08);
+      --text:#e8ecf7;
+      --muted:#aab3cf;
+      --accent:#6aa7ff;
+      --accent-2:#8be3c7;
+      --warn:#ffd166;
+      --radius:18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
     }
     *{box-sizing:border-box}
     body{
-      margin:0; font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      background: radial-gradient(1200px 800px at 10% -10%, #111827, transparent),
-                  radial-gradient(1000px 700px at 110% -20%, #0b3b2e, transparent),
-                  var(--bg);
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       color:var(--text);
+      background:
+        radial-gradient(1000px 600px at 10% -10%, #1b2b6b 0%, transparent 60%),
+        radial-gradient(900px 700px at 100% 0%, #0e5a6d 0%, transparent 55%),
+        linear-gradient(180deg, var(--bg) 0%, #070b17 100%);
+      min-height:100vh;
     }
     header{
-      padding:32px 20px 12px; max-width:1000px; margin:0 auto;
-      display:flex; align-items:center; gap:14px;
+      position:sticky; top:0;
+      backdrop-filter: blur(8px);
+      background: rgba(7,11,23,.7);
+      border-bottom:1px solid var(--stroke);
+      z-index:5;
     }
-    .logo{
-      width:56px; height:56px; border-radius:14px; background:#111827;
-      display:grid; place-items:center; font-weight:800; letter-spacing:.5px;
-      border:1px solid rgba(255,255,255,.06);
-      box-shadow:0 8px 30px rgba(0,0,0,.35);
+    .wrap{max-width:1100px; margin:0 auto; padding:18px 20px;}
+    .brand{
+      display:flex; align-items:center; gap:16px;
     }
-    h1{font-size:28px; margin:0}
-    p.lead{margin:6px 0 0; color:var(--muted)}
-    main{max-width:1000px; margin:0 auto; padding:12px 20px 40px}
-    .grid{
-      display:grid; gap:14px;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+
+    /* >>> LOGO IMAGE STYLE <<< */
+    .logo-img{
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+      border-radius: 6px;
+      background:#fff;
+      padding:4px 6px;
+      box-shadow: 0 0 0 2px rgba(255,255,255,.25);
+    }
+
+    .title h1{margin:0; font-size:20px; letter-spacing:.2px;}
+    .title p{margin:2px 0 0; color:var(--muted); font-size:13px;}
+
+    .hero{
+      display:grid; grid-template-columns: 1.1fr .9fr; gap:18px;
+      margin-top:18px;
+    }
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;}
+    }
+    .panel{
+      background: linear-gradient(180deg, var(--bg-soft), transparent), var(--card);
+      border:1px solid var(--stroke);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .panel::after{
+      content:"";
+      position:absolute; inset:-40% -20% auto auto; width:260px; height:260px;
+      background: radial-gradient(circle, rgba(106,167,255,.25), transparent 60%);
+      transform: translate(40px, -40px);
+      filter: blur(10px);
+    }
+    .hero h2{
+      margin:0 0 8px; font-size:26px;
+    }
+    .hero p{
+      margin:0 0 14px; color:var(--muted); line-height:1.55;
+    }
+
+    .actions{
+      display:grid; grid-template-columns: repeat(3,1fr); gap:14px;
+      margin-top:14px;
+    }
+    @media (max-width:900px){
+      .actions{grid-template-columns:1fr 1fr;}
+    }
+    @media (max-width:520px){
+      .actions{grid-template-columns:1fr;}
     }
     .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.03), transparent), var(--card);
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:16px; padding:16px;
-      box-shadow:0 8px 30px rgba(0,0,0,.35);
+      background: linear-gradient(180deg, var(--card-2), var(--card));
+      border:1px solid var(--stroke);
+      border-radius:16px;
+      padding:16px;
       display:flex; flex-direction:column; gap:10px;
-      min-height:160px;
+      box-shadow:var(--shadow);
+      transition: transform .12s ease, border-color .12s ease;
+      position:relative;
     }
-    .card h2{font-size:18px; margin:0}
-    .card p{margin:0; color:var(--muted); font-size:14px; line-height:1.45}
-    a.btn{
+    .card:hover{
+      transform: translateY(-3px);
+      border-color: rgba(106,167,255,.45);
+    }
+    .icon{
+      width:38px; height:38px; border-radius:10px;
+      display:grid; place-items:center; font-size:18px;
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--stroke);
+    }
+    .card h3{margin:0; font-size:16px;}
+    .card p{margin:0; color:var(--muted); font-size:13px; line-height:1.45;}
+    .btn{
       margin-top:auto;
       display:inline-flex; align-items:center; justify-content:center; gap:8px;
-      padding:10px 12px; border-radius:12px;
-      text-decoration:none; font-weight:600; font-size:14px;
-      border:1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.04);
+      padding:10px 12px; border-radius:10px;
+      color:#06122c; text-decoration:none; font-weight:700; font-size:14px;
+      background: linear-gradient(135deg, var(--accent), #8fd3ff);
+      border:0;
+    }
+    .btn.secondary{
+      background: linear-gradient(135deg, #1f2a55, #1a2246);
       color:var(--text);
-      transition:.15s ease;
-      outline:none;
+      border:1px solid var(--stroke);
+      font-weight:600;
     }
-    a.btn:hover{transform:translateY(-1px); border-color:rgba(255,255,255,.16)}
-    a.btn:focus{box-shadow:0 0 0 4px var(--ring)}
-    .accent{border-color:rgba(34,197,94,.5); background:rgba(34,197,94,.12)}
-    .accent2{border-color:rgba(96,165,250,.5); background:rgba(96,165,250,.12)}
-    .warn{border-color:rgba(245,158,11,.55); background:rgba(245,158,11,.12)}
+    .tag{
+      display:inline-flex; align-items:center;
+      font-size:11px; color:#0b1020; font-weight:800;
+      background: var(--warn); padding:4px 8px; border-radius:999px;
+      width:max-content;
+    }
+
+    .side-list{
+      display:grid; gap:10px; margin-top:8px;
+    }
+    .side-item{
+      display:flex; gap:12px; align-items:flex-start;
+      padding:12px; border-radius:12px;
+      background: rgba(255,255,255,.03);
+      border:1px dashed var(--stroke);
+    }
+    .side-item b{display:block; margin-bottom:2px;}
     footer{
-      max-width:1000px; margin:0 auto; padding:0 20px 24px; color:var(--muted); font-size:13px;
-      display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between;
+      margin:22px 0 10px; color:var(--muted); font-size:12px; text-align:center;
     }
-    .pill{
-      display:inline-flex; gap:6px; align-items:center;
-      border:1px solid rgba(255,255,255,.08);
-      padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.03);
-    }
-    .small{font-size:12px}
-    .list{margin:0; padding-left:18px; color:var(--muted); font-size:13px}
-    .banner{
-      background:rgba(96,165,250,.08);
-      border:1px dashed rgba(96,165,250,.4);
-      padding:12px 14px; border-radius:12px; margin:10px 0 14px; color:#cfe3ff; font-size:14px;
-    }
+    .small{font-size:12px;color:var(--muted);}
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">IB</div>
-    <div>
-      <h1>MyIdentity Portal</h1>
-      <p class="lead">Ibero-American League, Inc. — password, MFA, and account help in one place.</p>
+
+<header>
+  <div class="wrap brand">
+    <!-- >>> Real logo inserted here <<< -->
+    <img src="R-Ibero-RGB-MED.jpg" class="logo-img" alt="Ibero Logo">
+
+    <div class="title">
+      <h1>Ibero MyIdentity Portal</h1>
+      <p>Self-service account help for staff</p>
     </div>
-  </header>
+  </div>
+</header>
 
-  <main>
-    <div class="banner">
-      <strong>Locked out?</strong> Start with <em>Reset your password</em>. You don’t need to be signed in.
+<main class="wrap">
+
+  <section class="hero">
+    <div class="panel">
+      <h2>Need help getting back in?</h2>
+      <p>
+        Use the options below to reset your password, review security settings,
+        or get help from IT. This page works even if you can’t log into Microsoft.
+      </p>
+
+      <div class="actions">
+
+        <div class="card">
+          <div class="icon">🔑</div>
+          <h3>Reset your password</h3>
+          <p>Forgot it or just time for a change? Reset your Microsoft password here.</p>
+          <a class="btn" href="https://passwordreset.microsoftonline.com/" target="_blank" rel="noopener">
+            Reset Password →
+          </a>
+        </div>
+
+        <div class="card">
+          <div class="icon">📲</div>
+          <h3>Set up Authenticator (MFA)</h3>
+          <p>Use Microsoft Authenticator for secure push approvals and number matching.</p>
+          <a class="btn" href="https://mysignins.microsoft.com/security-info" target="_blank" rel="noopener">
+            Manage MFA →
+          </a>
+        </div>
+
+        <div class="card">
+          <div class="icon">🧾</div>
+          <h3>Check your account info</h3>
+          <p>Review your profile, password status, and security basics.</p>
+          <a class="btn" href="https://myaccount.microsoft.com/" target="_blank" rel="noopener">
+            Open My Account →
+          </a>
+        </div>
+
+        <div class="card">
+          <div class="icon">🆕</div>
+          <h3>Coming Soon…</h3>
+          <p><b>A new IT Ticketing System</b> for faster help requests, tracking, and updates.</p>
+          <span class="tag">In progress</span>
+          <a class="btn secondary" href="#" onclick="return false;">
+            Stay tuned
+          </a>
+        </div>
+
+        <div class="card">
+          <div class="icon">📘</div>
+          <h3>Quick how-to guides</h3>
+          <p>Short guides for common issues: printing, Wi-Fi, Teams, and more.</p>
+          <a class="btn secondary" href="#" target="_blank" rel="noopener">
+            Open Guides →
+          </a>
+        </div>
+
+        <div class="card">
+          <div class="icon">☎️</div>
+          <h3>Contact IT</h3>
+          <p>If you’re stuck, reach out. We’ll get you sorted.</p>
+          <a class="btn" href="mailto:helpdesk@ibero.org">
+            Email IT →
+          </a>
+        </div>
+
+      </div>
+
+      <p class="small" style="margin-top:14px;">
+        Tip: If your password reset fails, it usually means your security info isn’t set up yet — use “Set up Authenticator.”
+      </p>
     </div>
 
-    <section class="grid">
-      <div class="card">
-        <h2>Reset your password</h2>
-        <p>Use self‑service password reset (SSPR). Works even if you can’t sign in.</p>
-        <a class="btn accent" href="https://aka.ms/sspr" target="_blank" rel="noopener">Go to password reset →</a>
-      </div>
+    <aside class="panel">
+      <h3 style="margin:0 0 6px;">Common issues</h3>
+      <div class="side-list">
 
-      <div class="card">
-        <h2>Update MFA methods</h2>
-        <p>Add/replace your Authenticator app, phone, or other verification methods.</p>
-        <a class="btn accent2" href="https://mysignins.microsoft.com/security-info" target="_blank" rel="noopener">Manage security info →</a>
-      </div>
+        <div class="side-item">
+          <div class="icon">🔒</div>
+          <div>
+            <b>Account locked?</b>
+            Try resetting your password first. If you still can’t sign in, contact IT.
+          </div>
+        </div>
 
-      <div class="card">
-        <h2>Check recent sign‑ins</h2>
-        <p>See if anything looks off. Report anything you don’t recognize.</p>
-        <a class="btn" href="https://mysignins.microsoft.com/activity" target="_blank" rel="noopener">View sign‑in activity →</a>
-      </div>
+        <div class="side-item">
+          <div class="icon">📵</div>
+          <div>
+            <b>Lost your phone?</b>
+            Contact IT to reset MFA and re-enroll a new device.
+          </div>
+        </div>
 
-      <div class="card">
-        <h2>Set up Microsoft Authenticator</h2>
-        <p>Install the app and turn on push notifications for easier sign‑in and resets.</p>
-        <a class="btn" href="https://aka.ms/mfasetup" target="_blank" rel="noopener">Authenticator setup →</a>
-      </div>
+        <div class="side-item">
+          <div class="icon">🚫</div>
+          <div>
+            <b>Authenticator not prompting?</b>
+            Open the app, approve pending requests, and make sure notifications are enabled.
+          </div>
+        </div>
 
-      <div class="card">
-        <h2>Need help from IT?</h2>
-        <p>Reach out if you’re stuck or something doesn’t look right.</p>
-        <ul class="list">
-          <li>Email: <a href="mailto:it@ibero.org" style="color:var(--text);text-decoration:none;">it@ibero.org</a></li>
-          <li>Phone: (585) 000‑0000</li>
-          <li>Hours: Mon–Fri, 9:00a–5:00p</li>
-        </ul>
-        <a class="btn warn" href="mailto:ithelp@ibero.org">Email IT →</a>
-      </div>
+        <div class="side-item">
+          <div class="icon">🕒</div>
+          <div>
+            <b>Password expired?</b>
+            Use “Reset your password.” Your new password works for email, Teams, and all Microsoft apps.
+          </div>
+        </div>
 
-      <div class="card">
-        <h2>Quick tips</h2>
-        <p>Do these now so resets are easy later:</p>
-        <ul class="list">
-          <li>Register Authenticator + a backup phone.</li>
-          <li>Don’t approve push prompts you didn’t start.</li>
-          <li>Use a long passphrase, not a short password.</li>
-        </ul>
       </div>
-    </section>
-  </main>
+    </aside>
+  </section>
 
   <footer>
-    <div class="pill small">Last updated: <span id="dt"></span></div>
-    <div class="small">If you suspect account compromise, contact IT immediately.</div>
+    Ibero-American League IT • For urgent issues call ext. 1234 • helpdesk@ibero.org
   </footer>
 
-  <script>
-    document.getElementById('dt').textContent = new Date().toLocaleDateString();
-  </script>
+</main>
+
 </body>
 </html>
