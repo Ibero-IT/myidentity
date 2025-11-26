@@ -38,11 +38,13 @@
       z-index:5;
     }
     .wrap{max-width:1100px; margin:0 auto; padding:18px 20px;}
+    .header-row{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+    }
     .brand{
       display:flex; align-items:center; gap:16px;
     }
 
-    /* LOGO STYLE */
     .logo-img{
       height: 48px;
       width: auto;
@@ -56,12 +58,27 @@
     .title h1{margin:0; font-size:20px; letter-spacing:.2px;}
     .title p{margin:2px 0 0; color:var(--muted); font-size:13px;}
 
+    .lang-switch{
+      font-size:13px;
+      color:var(--text);
+      text-decoration:none;
+      border-radius:999px;
+      padding:6px 12px;
+      border:1px solid var(--stroke);
+      background:rgba(7,11,23,.8);
+    }
+    .lang-switch:hover{
+      border-color:rgba(106,167,255,.7);
+      color:#ffffff;
+    }
+
     .hero{
       display:grid; grid-template-columns: 1.1fr .9fr; gap:18px;
       margin-top:18px;
     }
     @media (max-width:900px){
       .hero{grid-template-columns:1fr;}
+      .header-row{flex-direction:column; align-items:flex-start;}
     }
     .panel{
       background: linear-gradient(180deg, var(--bg-soft), transparent), var(--card);
@@ -158,13 +175,16 @@
 <body>
 
 <header>
-  <div class="wrap brand">
-    <img src="R-Ibero-RGB-MED.jpg" class="logo-img" alt="Ibero Logo">
-
-    <div class="title">
-      <h1>Ibero MyIdentity Portal</h1>
-      <p>Self-service account help for staff</p>
+  <div class="wrap header-row">
+    <div class="brand">
+      <img src="R-Ibero-RGB-MED.jpg" class="logo-img" alt="Ibero Logo">
+      <div class="title">
+        <h1>Ibero MyIdentity Portal</h1>
+        <p>Self-service account help for staff</p>
+      </div>
     </div>
+
+    <a class="lang-switch" href="index-es.html">Español</a>
   </div>
 </header>
 
@@ -207,7 +227,6 @@
           </a>
         </div>
 
-        <!-- COMING SOON: TICKETING SYSTEM -->
         <div class="card">
           <div class="icon">🆕</div>
           <h3>Coming Soon…</h3>
@@ -218,7 +237,6 @@
           </a>
         </div>
 
-        <!-- COMING SOON: HOW-TO GUIDES -->
         <div class="card">
           <div class="icon">📘</div>
           <h3>Quick how-to guides</h3>
@@ -233,7 +251,7 @@
           <div class="icon">☎️</div>
           <h3>Contact IT</h3>
           <p>If you’re stuck, reach out. We’ll get you sorted.</p>
-          <a class="btn" href="mailto:helpdesk@iaal.org">
+          <a class="btn" href="mailto:helpdesk@ibero.org">
             Email IT →
           </a>
         </div>
@@ -286,7 +304,7 @@
   </section>
 
   <footer>
-    Ibero-American Action League IT • For urgent issues call ext. 1234 • helpdesk@iaal.org
+    Ibero-American League IT • For urgent issues call ext. 1234 • helpdesk@ibero.org
   </footer>
 
 </main>
