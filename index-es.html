@@ -6,16 +6,24 @@
   <title>Ibero | MiIdentidad</title>
   <style>
     :root{
-      --bg: #0b1020;
-      --bg-soft:#121833;
-      --card:#0f1730;
-      --card-2:#111c3d;
+      /* Ibero palette */
+      --ibero-blue: #0040A0;
+      --ibero-navy: #004080;
+      --ibero-gold: #E0C040;
+      --ibero-gold-soft: #E0C060;
+      --ibero-blue-soft: #80A0C0;
+
+      /* UI tokens */
+      --bg: #020612;
+      --bg-soft:#041024;
+      --card:#051935;
+      --card-2:#071f42;
       --stroke:rgba(255,255,255,.08);
-      --text:#e8ecf7;
-      --muted:#aab3cf;
-      --accent:#6aa7ff;
-      --accent-2:#8be3c7;
-      --warn:#ffd166;
+      --text:#f3f5fb;
+      --muted:#c0c7dd;
+      --accent: var(--ibero-blue);
+      --accent-2: var(--ibero-blue-soft);
+      --warn: var(--ibero-gold);
       --radius:18px;
       --shadow: 0 10px 30px rgba(0,0,0,.35);
     }
@@ -25,15 +33,15 @@
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       color:var(--text);
       background:
-        radial-gradient(1000px 600px at 10% -10%, #1b2b6b 0%, transparent 60%),
-        radial-gradient(900px 700px at 100% 0%, #0e5a6d 0%, transparent 55%),
-        linear-gradient(180deg, var(--bg) 0%, #070b17 100%);
+        radial-gradient(1000px 600px at 10% -10%, var(--ibero-blue) 0%, transparent 60%),
+        radial-gradient(900px 700px at 100% 0%, var(--ibero-navy) 0%, transparent 55%),
+        linear-gradient(180deg, var(--bg) 0%, #020814 100%);
       min-height:100vh;
     }
     header{
       position:sticky; top:0;
       backdrop-filter: blur(8px);
-      background: rgba(7,11,23,.7);
+      background: rgba(2,6,18,.9);
       border-bottom:1px solid var(--stroke);
       z-index:5;
     }
@@ -60,16 +68,17 @@
 
     .lang-switch{
       font-size:13px;
-      color:var(--text);
+      color:#06122c;
       text-decoration:none;
       border-radius:999px;
       padding:6px 12px;
-      border:1px solid var(--stroke);
-      background:rgba(7,11,23,.8);
+      background: var(--ibero-gold);
+      border:0;
+      font-weight:700;
+      box-shadow:0 4px 10px rgba(0,0,0,.35);
     }
     .lang-switch:hover{
-      border-color:rgba(106,167,255,.7);
-      color:#ffffff;
+      filter:brightness(1.05);
     }
 
     .hero{
@@ -92,7 +101,7 @@
     .panel::after{
       content:"";
       position:absolute; inset:-40% -20% auto auto; width:260px; height:260px;
-      background: radial-gradient(circle, rgba(106,167,255,.25), transparent 60%);
+      background: radial-gradient(circle, rgba(0,64,160,.35), transparent 60%);
       transform: translate(40px, -40px);
       filter: blur(10px);
     }
@@ -120,18 +129,20 @@
       padding:16px;
       display:flex; flex-direction:column; gap:10px;
       box-shadow:var(--shadow);
-      transition: transform .12s ease, border-color .12s ease;
+      transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease;
       position:relative;
     }
     .card:hover{
       transform: translateY(-3px);
-      border-color: rgba(106,167,255,.45);
+      border-color: rgba(0,64,160,.7);
+      box-shadow:0 14px 32px rgba(0,0,0,.6);
     }
     .icon{
       width:38px; height:38px; border-radius:10px;
       display:grid; place-items:center; font-size:18px;
-      background: rgba(255,255,255,.06);
+      background: rgba(255,255,255,.04);
       border:1px solid var(--stroke);
+      color: var(--ibero-blue-soft);
     }
     .card h3{margin:0; font-size:16px;}
     .card p{margin:0; color:var(--muted); font-size:13px; line-height:1.45;}
@@ -140,20 +151,27 @@
       display:inline-flex; align-items:center; justify-content:center; gap:8px;
       padding:10px 12px; border-radius:10px;
       color:#06122c; text-decoration:none; font-weight:700; font-size:14px;
-      background: linear-gradient(135deg, var(--accent), #8fd3ff);
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
       border:0;
+      box-shadow:0 6px 16px rgba(0,0,0,.45);
     }
     .btn.secondary{
-      background: linear-gradient(135deg, #1f2a55, #1a2246);
+      background: linear-gradient(135deg, #07152e, var(--ibero-navy));
       color:var(--text);
-      border:1px solid var(--stroke);
+      border:1px solid rgba(128,160,192,.5);
       font-weight:600;
+      box-shadow:0 4px 12px rgba(0,0,0,.4);
+    }
+    .btn:hover{
+      filter:brightness(1.05);
     }
     .tag{
       display:inline-flex; align-items:center;
       font-size:11px; color:#0b1020; font-weight:800;
-      background: var(--warn); padding:4px 8px; border-radius:999px;
+      background: var(--warn);
+      padding:4px 8px; border-radius:999px;
       width:max-content;
+      box-shadow:0 4px 10px rgba(0,0,0,.35);
     }
 
     .side-list{
@@ -162,7 +180,7 @@
     .side-item{
       display:flex; gap:12px; align-items:flex-start;
       padding:12px; border-radius:12px;
-      background: rgba(255,255,255,.03);
+      background: rgba(255,255,255,.02);
       border:1px dashed var(--stroke);
     }
     .side-item b{display:block; margin-bottom:2px;}
@@ -252,7 +270,7 @@
           <div class="icon">☎️</div>
           <h3>Comunícate con IT</h3>
           <p>Si necesitas ayuda, estamos aquí. Escríbenos y con gusto te apoyamos.</p>
-          <a class="btn" href="mailto:it.support@iaal.org">
+          <a class="btn" href="mailto:helpdesk@ibero.org">
             Enviar correo →
           </a>
         </div>
@@ -306,7 +324,7 @@
   </section>
 
   <footer>
-    Equipo de IT – Ibero-American League • Para asuntos urgentes llama a la ext. 999 • it.support@iaal.org
+    Equipo de IT – Ibero-American League • Para asuntos urgentes llama a la ext. 1234 • helpdesk@ibero.org
   </footer>
 
 </main>
