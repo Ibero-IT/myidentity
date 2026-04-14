@@ -6,14 +6,11 @@
   <title>Ibero | MyIdentity</title>
   <style>
     :root{
-      /* Ibero palette */
       --ibero-blue: #0040A0;
       --ibero-navy: #004080;
       --ibero-gold: #E0C040;
-      --ibero-gold-soft: #E0C060;
       --ibero-blue-soft: #80A0C0;
 
-      /* UI tokens */
       --bg: #020612;
       --bg-soft:#041024;
       --card:#051935;
@@ -27,7 +24,9 @@
       --radius:18px;
       --shadow: 0 10px 30px rgba(0,0,0,.35);
     }
+
     *{box-sizing:border-box}
+
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
@@ -38,33 +37,56 @@
         linear-gradient(180deg, var(--bg) 0%, #020814 100%);
       min-height:100vh;
     }
+
     header{
-      position:sticky; top:0;
+      position:sticky;
+      top:0;
       backdrop-filter: blur(8px);
       background: rgba(2,6,18,.9);
       border-bottom:1px solid var(--stroke);
       z-index:5;
     }
-    .wrap{max-width:1100px; margin:0 auto; padding:18px 20px;}
-    .header-row{
-      display:flex; align-items:center; justify-content:space-between; gap:16px;
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:18px 20px;
     }
+
+    .header-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
     .brand{
-      display:flex; align-items:center; gap:16px;
+      display:flex;
+      align-items:center;
+      gap:16px;
     }
 
     .logo-img{
-      height: 48px;
-      width: auto;
-      object-fit: contain;
-      border-radius: 6px;
+      height:48px;
+      width:auto;
+      object-fit:contain;
+      border-radius:6px;
       background:#fff;
       padding:4px 6px;
       box-shadow: 0 0 0 2px rgba(255,255,255,.25);
     }
 
-    .title h1{margin:0; font-size:20px; letter-spacing:.2px;}
-    .title p{margin:2px 0 0; color:var(--muted); font-size:13px;}
+    .title h1{
+      margin:0;
+      font-size:20px;
+      letter-spacing:.2px;
+    }
+
+    .title p{
+      margin:2px 0 0;
+      color:var(--muted);
+      font-size:13px;
+    }
 
     .lang-switch{
       font-size:13px;
@@ -77,18 +99,24 @@
       font-weight:700;
       box-shadow:0 4px 10px rgba(0,0,0,.35);
     }
+
     .lang-switch:hover{
       filter:brightness(1.05);
     }
 
     .hero{
-      display:grid; grid-template-columns: 1.1fr .9fr; gap:18px;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:18px;
       margin-top:18px;
+      align-items:start;
     }
+
     @media (max-width:900px){
       .hero{grid-template-columns:1fr;}
       .header-row{flex-direction:column; align-items:flex-start;}
     }
+
     .panel{
       background: linear-gradient(180deg, var(--bg-soft), transparent), var(--card);
       border:1px solid var(--stroke);
@@ -98,73 +126,140 @@
       position:relative;
       overflow:hidden;
     }
+
     .panel::after{
       content:"";
-      position:absolute; inset:-40% -20% auto auto; width:260px; height:260px;
+      position:absolute;
+      inset:-40% -20% auto auto;
+      width:260px;
+      height:260px;
       background: radial-gradient(circle, rgba(0,64,160,.35), transparent 60%);
       transform: translate(40px, -40px);
       filter: blur(10px);
+      pointer-events:none;
     }
+
     .hero h2{
-      margin:0 0 8px; font-size:26px;
+      margin:0 0 8px;
+      font-size:26px;
     }
+
     .hero p{
-      margin:0 0 14px; color:var(--muted); line-height:1.55;
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.55;
     }
 
     .actions{
-      display:grid; grid-template-columns: repeat(3,1fr); gap:14px;
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:14px;
       margin-top:14px;
+      position:relative;
+      z-index:1;
     }
+
     @media (max-width:900px){
       .actions{grid-template-columns:1fr 1fr;}
     }
+
     @media (max-width:520px){
       .actions{grid-template-columns:1fr;}
     }
+
     .card{
       background: linear-gradient(180deg, var(--card-2), var(--card));
       border:1px solid var(--stroke);
       border-radius:16px;
       padding:16px;
-      display:flex; flex-direction:column; gap:10px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
       box-shadow:var(--shadow);
       transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease;
       position:relative;
+      min-width:0;
     }
+
     .card:hover{
       transform: translateY(-3px);
       border-color: rgba(0,64,160,.7);
       box-shadow:0 14px 32px rgba(0,0,0,.6);
     }
-   .icon{
-  width:38px;
-  height:38px;
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background: rgba(255,255,255,.04);
-  border:1px solid var(--stroke);
-}
 
-.icon img{
-  max-width:22px;
-  max-height:22px;
-  object-fit:contain;
-}
+    .card.primary{
+      border: 2px solid var(--ibero-gold);
+      box-shadow:
+        0 0 0 2px rgba(224,192,64,0.25),
+        0 12px 28px rgba(0,0,0,0.6),
+        0 0 18px rgba(224,192,64,0.35);
+      transform: translateY(-2px);
     }
-    .card h3{margin:0; font-size:16px;}
-    .card p{margin:0; color:var(--muted); font-size:13px; line-height:1.45;}
+
+    .card.primary::before{
+      content:"Start Here";
+      position:absolute;
+      top:-10px;
+      left:12px;
+      font-size:11px;
+      font-weight:800;
+      background: var(--ibero-gold);
+      color:#06122c;
+      padding:3px 8px;
+      border-radius:999px;
+      box-shadow:0 4px 10px rgba(0,0,0,.4);
+    }
+
+    .icon{
+      width:38px;
+      height:38px;
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--stroke);
+      color: var(--ibero-blue-soft);
+      flex: 0 0 auto;
+    }
+
+    .icon img{
+      max-width:22px;
+      max-height:22px;
+      object-fit:contain;
+      display:block;
+    }
+
+    .card h3{
+      margin:0;
+      font-size:16px;
+      line-height:1.25;
+    }
+
+    .card p{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+
     .btn{
       margin-top:auto;
-      display:inline-flex; align-items:center; justify-content:center; gap:8px;
-      padding:10px 12px; border-radius:10px;
-      color:#06122c; text-decoration:none; font-weight:700; font-size:14px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius:10px;
+      color:#06122c;
+      text-decoration:none;
+      font-weight:700;
+      font-size:14px;
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
       border:0;
       box-shadow:0 6px 16px rgba(0,0,0,.45);
     }
+
     .btn.secondary{
       background: linear-gradient(135deg, #07152e, var(--ibero-navy));
       color:var(--text);
@@ -172,32 +267,58 @@
       font-weight:600;
       box-shadow:0 4px 12px rgba(0,0,0,.4);
     }
+
     .btn:hover{
       filter:brightness(1.05);
     }
+
     .tag{
-      display:inline-flex; align-items:center;
-      font-size:11px; color:#0b1020; font-weight:800;
+      display:inline-flex;
+      align-items:center;
+      font-size:11px;
+      color:#0b1020;
+      font-weight:800;
       background: var(--warn);
-      padding:4px 8px; border-radius:999px;
+      padding:4px 8px;
+      border-radius:999px;
       width:max-content;
       box-shadow:0 4px 10px rgba(0,0,0,.35);
     }
 
     .side-list{
-      display:grid; gap:10px; margin-top:8px;
+      display:grid;
+      gap:10px;
+      margin-top:8px;
+      position:relative;
+      z-index:1;
     }
+
     .side-item{
-      display:flex; gap:12px; align-items:flex-start;
-      padding:12px; border-radius:12px;
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:12px;
+      border-radius:12px;
       background: rgba(255,255,255,.02);
       border:1px dashed var(--stroke);
     }
-    .side-item b{display:block; margin-bottom:2px;}
-    footer{
-      margin:22px 0 10px; color:var(--muted); font-size:12px; text-align:center;
+
+    .side-item b{
+      display:block;
+      margin-bottom:2px;
     }
-    .small{font-size:12px;color:var(--muted);}
+
+    footer{
+      margin:22px 0 10px;
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
+    }
+
+    .small{
+      font-size:12px;
+      color:var(--muted);
+    }
   </style>
 </head>
 <body>
@@ -211,13 +332,11 @@
         <p>Self-service account help for staff</p>
       </div>
     </div>
-
     <a class="lang-switch" href="index-es.html">Español</a>
   </div>
 </header>
 
 <main class="wrap">
-
   <section class="hero">
     <div class="panel">
       <h2>Need help getting back in?</h2>
@@ -227,77 +346,67 @@
       </p>
 
       <div class="actions">
-
- <div class="actions">
-
-  <!-- 1. START HERE (TICKETING) -->
-  <div class="card primary">
-    <div class="icon">🎫</div>
-    <h3>Submit a Request</h3>
-    <p>Submit a request for help, support, or services and track updates in one place.</p>
-    <p class="small" style="margin:0;">Requires Ibero email login to use.</p>
-    <a class="btn" href="https://ibero.desk365.io/support" target="_blank" rel="noopener">
-      Submit a Request →
-    </a>
-  </div>
-
-  <!-- 2. PAYLOCITY -->
-  <div class="card">
-    <div class="icon">
-      <img src="paylocity.png" alt="Paylocity">
-    </div>
-    <h3>Log into Paylocity</h3>
-    <p>Access your pay information, time off, benefits, and employee details.</p>
-    <p class="small" style="margin:0;">Requires Ibero email login to use.</p>
-    <a class="btn" href="https://access.paylocity.com/" target="_blank" rel="noopener">
-      Open Paylocity →
-    </a>
-  </div>
-
-  <!-- 3. 3CX -->
-  <div class="card">
-    <div class="icon">
-      <img src="3cx.png" alt="3CX">
-    </div>
-    <h3>Login to 3CX Phone System</h3>
-    <p>Access your phone system, voicemail, and settings from anywhere.</p>
-    <a class="btn" href="https://ibero.3cx.us" target="_blank" rel="noopener">
-      Open 3CX →
-    </a>
-  </div>
-
-  <!-- 4. PASSWORD RESET -->
-  <div class="card">
-    <div class="icon">🔑</div>
-    <h3>Reset your password</h3>
-    <p>Forgot it or just time for a change? Reset your Microsoft password here.</p>
-    <a class="btn" href="https://passwordreset.microsoftonline.com/" target="_blank" rel="noopener">
-      Reset Password →
-    </a>
-  </div>
-
-  <!-- 5. MFA -->
-  <div class="card">
-    <div class="icon">📲</div>
-    <h3>Set up Authenticator (MFA)</h3>
-    <p>Use Microsoft Authenticator for secure approvals and sign-ins.</p>
-    <a class="btn" href="https://mysignins.microsoft.com/security-info" target="_blank" rel="noopener">
-      Manage MFA →
-    </a>
-  </div>
-
-  <!-- 6. GUIDES -->
-  <div class="card">
-    <div class="icon">📘</div>
-    <h3>Quick how-to guides</h3>
-    <p>Short guides for common issues like printing, Wi-Fi, Teams, and more.</p>
-    <span class="tag">In progress</span>
-    <a class="btn secondary" href="#" onclick="return false;">
-      Coming Soon
-    </a>
-  </div>
-
+        <div class="card primary">
+          <div class="icon">🎫</div>
+          <h3>Submit a Request</h3>
+          <p>Submit a request for help, support, or services and track updates in one place.</p>
+          <p class="small" style="margin:0;">Requires Ibero email login to use.</p>
+          <a class="btn" href="https://ibero.desk365.io/support" target="_blank" rel="noopener">
+            Submit a Request →
+          </a>
         </div>
+
+        <div class="card">
+          <div class="icon">
+            <img src="paylocity.png" alt="Paylocity">
+          </div>
+          <h3>Log into Paylocity</h3>
+          <p>Access your pay information, time off, benefits, and employee details.</p>
+          <p class="small" style="margin:0;">Requires Ibero email login to use.</p>
+          <a class="btn" href="https://access.paylocity.com/" target="_blank" rel="noopener">
+            Open Paylocity →
+          </a>
+        </div>
+
+        <div class="card">
+          <div class="icon">
+            <img src="3cx.png" alt="3CX">
+          </div>
+          <h3>Login to 3CX Phone System</h3>
+          <p>Access your phone system, voicemail, and settings from anywhere.</p>
+          <a class="btn" href="https://ibero.3cx.us" target="_blank" rel="noopener">
+            Open 3CX →
+          </a>
+        </div>
+
+        <div class="card">
+          <div class="icon">🔑</div>
+          <h3>Reset your password</h3>
+          <p>Forgot it or just time for a change? Reset your Microsoft password here.</p>
+          <a class="btn" href="https://passwordreset.microsoftonline.com/" target="_blank" rel="noopener">
+            Reset Password →
+          </a>
+        </div>
+
+        <div class="card">
+          <div class="icon">📲</div>
+          <h3>Set up Authenticator (MFA)</h3>
+          <p>Use Microsoft Authenticator for secure approvals and sign-ins.</p>
+          <a class="btn" href="https://mysignins.microsoft.com/security-info" target="_blank" rel="noopener">
+            Manage MFA →
+          </a>
+        </div>
+
+        <div class="card">
+          <div class="icon">📘</div>
+          <h3>Quick how-to guides</h3>
+          <p>Short guides for common issues like printing, Wi-Fi, Teams, and more.</p>
+          <span class="tag">In progress</span>
+          <a class="btn secondary" href="#" onclick="return false;">
+            Coming Soon
+          </a>
+        </div>
+      </div>
 
       <p class="small" style="margin-top:14px;">
         Tip: If your password reset fails, it usually means your security info isn’t set up yet — use “Set up Authenticator.”
@@ -307,7 +416,6 @@
     <aside class="panel">
       <h3 style="margin:0 0 6px;">Common issues</h3>
       <div class="side-list">
-
         <div class="side-item">
           <div class="icon">🔒</div>
           <div>
@@ -339,7 +447,6 @@
             Use “Reset your password.” Your new password works for email, Teams, and all Microsoft apps.
           </div>
         </div>
-
       </div>
     </aside>
   </section>
@@ -347,7 +454,6 @@
   <footer>
     Ibero IT Dept • For urgent issues call ext. 987 • tickets@ibero.org
   </footer>
-
 </main>
 
 </body>
