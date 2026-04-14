@@ -1,339 +1,218 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ibero | MiIdentidad</title>
-  <style>
-    :root{
-      /* Ibero palette */
-      --ibero-blue: #0040A0;
-      --ibero-navy: #004080;
-      --ibero-gold: #E0C040;
-      --ibero-gold-soft: #E0C060;
-      --ibero-blue-soft: #80A0C0;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ibero | MiIdentidad</title>
 
-      /* UI tokens */
-      --bg: #020612;
-      --bg-soft:#041024;
-      --card:#051935;
-      --card-2:#071f42;
-      --stroke:rgba(255,255,255,.08);
-      --text:#f3f5fb;
-      --muted:#c0c7dd;
-      --accent: var(--ibero-blue);
-      --accent-2: var(--ibero-blue-soft);
-      --warn: var(--ibero-gold);
-      --radius:18px;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1000px 600px at 10% -10%, var(--ibero-blue) 0%, transparent 60%),
-        radial-gradient(900px 700px at 100% 0%, var(--ibero-navy) 0%, transparent 55%),
-        linear-gradient(180deg, var(--bg) 0%, #020814 100%);
-      min-height:100vh;
-    }
-    header{
-      position:sticky; top:0;
-      backdrop-filter: blur(8px);
-      background: rgba(2,6,18,.9);
-      border-bottom:1px solid var(--stroke);
-      z-index:5;
-    }
-    .wrap{max-width:1100px; margin:0 auto; padding:18px 20px;}
-    .header-row{
-      display:flex; align-items:center; justify-content:space-between; gap:16px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:16px;
-    }
+<style>
+:root{
+  --ibero-blue:#0040A0;
+  --ibero-navy:#004080;
+  --ibero-gold:#E0C040;
+  --ibero-blue-soft:#80A0C0;
 
-    .logo-img{
-      height: 48px;
-      width: auto;
-      object-fit: contain;
-      border-radius: 6px;
-      background:#fff;
-      padding:4px 6px;
-      box-shadow: 0 0 0 2px rgba(255,255,255,.25);
-    }
+  --bg:#020612;
+  --bg-soft:#041024;
+  --card:#051935;
+  --card-2:#071f42;
+  --stroke:rgba(255,255,255,.08);
+  --text:#f3f5fb;
+  --muted:#c0c7dd;
+  --accent:var(--ibero-blue);
+  --accent-2:var(--ibero-blue-soft);
+  --warn:var(--ibero-gold);
+  --radius:18px;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+}
 
-    .title h1{margin:0; font-size:20px; letter-spacing:.2px;}
-    .title p{margin:2px 0 0; color:var(--muted); font-size:13px;}
+*{box-sizing:border-box}
 
-    .lang-switch{
-      font-size:13px;
-      color:#06122c;
-      text-decoration:none;
-      border-radius:999px;
-      padding:6px 12px;
-      background: var(--ibero-gold);
-      border:0;
-      font-weight:700;
-      box-shadow:0 4px 10px rgba(0,0,0,.35);
-    }
-    .lang-switch:hover{
-      filter:brightness(1.05);
-    }
+body{
+  margin:0;
+  font-family:system-ui,Segoe UI,Roboto;
+  color:var(--text);
+  background:
+    radial-gradient(1000px 600px at 10% -10%, var(--ibero-blue), transparent),
+    radial-gradient(900px 700px at 100% 0%, var(--ibero-navy), transparent),
+    linear-gradient(180deg,var(--bg),#020814);
+}
 
-    .hero{
-      display:grid; grid-template-columns: 1.1fr .9fr; gap:18px;
-      margin-top:18px;
-    }
-    @media (max-width:900px){
-      .hero{grid-template-columns:1fr;}
-      .header-row{flex-direction:column; align-items:flex-start;}
-    }
-    .panel{
-      background: linear-gradient(180deg, var(--bg-soft), transparent), var(--card);
-      border:1px solid var(--stroke);
-      border-radius:var(--radius);
-      padding:22px;
-      box-shadow:var(--shadow);
-      position:relative;
-      overflow:hidden;
-    }
-    .panel::after{
-      content:"";
-      position:absolute; inset:-40% -20% auto auto; width:260px; height:260px;
-      background: radial-gradient(circle, rgba(0,64,160,.35), transparent 60%);
-      transform: translate(40px, -40px);
-      filter: blur(10px);
-    }
-    .hero h2{
-      margin:0 0 8px; font-size:26px;
-    }
-    .hero p{
-      margin:0 0 14px; color:var(--muted); line-height:1.55;
-    }
+.wrap{max-width:1100px;margin:auto;padding:18px 20px;}
 
-    .actions{
-      display:grid; grid-template-columns: repeat(3,1fr); gap:14px;
-      margin-top:14px;
-    }
-    @media (max-width:900px){
-      .actions{grid-template-columns:1fr 1fr;}
-    }
-    @media (max-width:520px){
-      .actions{grid-template-columns:1fr;}
-    }
-    .card{
-      background: linear-gradient(180deg, var(--card-2), var(--card));
-      border:1px solid var(--stroke);
-      border-radius:16px;
-      padding:16px;
-      display:flex; flex-direction:column; gap:10px;
-      box-shadow:var(--shadow);
-      transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease;
-      position:relative;
-    }
-    .card:hover{
-      transform: translateY(-3px);
-      border-color: rgba(0,64,160,.7);
-      box-shadow:0 14px 32px rgba(0,0,0,.6);
-    }
-    .icon{
-      width:38px; height:38px; border-radius:10px;
-      display:grid; place-items:center; font-size:18px;
-      background: rgba(255,255,255,.04);
-      border:1px solid var(--stroke);
-      color: var(--ibero-blue-soft);
-    }
-    .card h3{margin:0; font-size:16px;}
-    .card p{margin:0; color:var(--muted); font-size:13px; line-height:1.45;}
-    .btn{
-      margin-top:auto;
-      display:inline-flex; align-items:center; justify-content:center; gap:8px;
-      padding:10px 12px; border-radius:10px;
-      color:#06122c; text-decoration:none; font-weight:700; font-size:14px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      border:0;
-      box-shadow:0 6px 16px rgba(0,0,0,.45);
-    }
-    .btn.secondary{
-      background: linear-gradient(135deg, #07152e, var(--ibero-navy));
-      color:var(--text);
-      border:1px solid rgba(128,160,192,.5);
-      font-weight:600;
-      box-shadow:0 4px 12px rgba(0,0,0,.4);
-    }
-    .btn:hover{
-      filter:brightness(1.05);
-    }
-    .tag{
-      display:inline-flex; align-items:center;
-      font-size:11px; color:#0b1020; font-weight:800;
-      background: var(--warn);
-      padding:4px 8px; border-radius:999px;
-      width:max-content;
-      box-shadow:0 4px 10px rgba(0,0,0,.35);
-    }
+.header-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
 
-    .side-list{
-      display:grid; gap:10px; margin-top:8px;
-    }
-    .side-item{
-      display:flex; gap:12px; align-items:flex-start;
-      padding:12px; border-radius:12px;
-      background: rgba(255,255,255,.02);
-      border:1px dashed var(--stroke);
-    }
-    .side-item b{display:block; margin-bottom:2px;}
-    footer{
-      margin:22px 0 10px; color:var(--muted); font-size:12px; text-align:center;
-    }
-    .small{font-size:12px;color:var(--muted);}
-  </style>
+.logo-img{
+  height:48px;
+  background:#fff;
+  padding:4px 6px;
+  border-radius:6px;
+}
+
+.hero{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:18px;
+  margin-top:18px;
+  align-items:start;
+}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;}
+}
+
+.panel{
+  background:var(--card);
+  border:1px solid var(--stroke);
+  border-radius:var(--radius);
+  padding:22px;
+}
+
+.actions{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+  margin-top:14px;
+}
+
+@media(max-width:900px){
+  .actions{grid-template-columns:1fr 1fr;}
+}
+
+.card{
+  background:var(--card-2);
+  border:1px solid var(--stroke);
+  border-radius:16px;
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  min-width:0;
+}
+
+.card.primary{
+  border:2px solid var(--ibero-gold);
+}
+
+.icon{
+  width:38px;
+  height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.icon img{
+  max-width:22px;
+  max-height:22px;
+}
+
+.btn{
+  margin-top:auto;
+  padding:10px;
+  background:var(--accent);
+  color:#fff;
+  text-decoration:none;
+  border-radius:10px;
+  text-align:center;
+}
+
+.side-list{
+  display:grid;
+  gap:10px;
+}
+
+.side-item{
+  padding:12px;
+  border:1px dashed var(--stroke);
+  border-radius:12px;
+}
+</style>
 </head>
+
 <body>
 
-<header>
-  <div class="wrap header-row">
-    <div class="brand">
-      <img src="R-Ibero-RGB-MED.jpg" class="logo-img" alt="Logo de Ibero">
-      <div class="title">
-        <h1>Portal MiIdentidad de Ibero</h1>
-        <p>Ayuda de cuenta para nuestro personal</p>
-      </div>
-    </div>
+<div class="wrap">
 
-    <a class="lang-switch" href="index.html">English</a>
-  </div>
-</header>
+<div class="hero">
 
-<main class="wrap">
+<!-- LEFT -->
+<div class="panel">
 
-  <section class="hero">
-    <div class="panel">
-      <h2>¿Necesitas una mano para volver a entrar?</h2>
-      <p>
-        Usa las opciones aquí abajo para restablecer tu contraseña, revisar tu seguridad
-        o comunicarte con el equipo de IT.  
-        <br>Esta página funciona aunque no puedas entrar a Microsoft.
-      </p>
+<h2>¿Necesitas ayuda?</h2>
 
-     <div class="actions">
+<div class="actions">
 
-  <!-- 1. TICKETING -->
-  <div class="card primary">
-    <div class="icon">🎫</div>
-    <h3>Enviar una solicitud</h3>
-    <p>Envía una solicitud de ayuda, servicio o apoyo y dale seguimiento en un solo lugar.</p>
-    <p class="small" style="margin:0;">Requiere iniciar sesión con tu correo de Ibero.</p>
-    <a class="btn" href="https://ibero.desk365.io/support" target="_blank" rel="noopener">
-      Enviar solicitud →
-    </a>
-  </div>
+<div class="card primary">
+<div class="icon">🎫</div>
+<h3>Enviar una solicitud</h3>
+<p>Envía una solicitud de ayuda o servicio y dale seguimiento.</p>
+<a class="btn" href="https://ibero.desk365.io/support">Enviar →</a>
+</div>
 
-  <!-- 2. PAYLOCITY -->
-  <div class="card">
-    <div class="icon">🧾</div>
-    <h3>Entrar a Paylocity</h3>
-    <p>Accede a tu información de pago, tiempo libre, beneficios y datos del empleado.</p>
-    <p class="small" style="margin:0;">Requiere iniciar sesión con tu correo de Ibero.</p>
-    <a class="btn" href="https://access.paylocity.com/" target="_blank" rel="noopener">
-      Abrir Paylocity →
-    </a>
-  </div>
+<div class="card">
+<div class="icon">
+<img src="paylocity.png">
+</div>
+<h3>Entrar a Paylocity</h3>
+<p>Accede a tu información de pago y beneficios.</p>
+<a class="btn" href="https://access.paylocity.com/">Abrir →</a>
+</div>
 
-  <!-- 3. 3CX -->
-  <div class="card">
-    <div class="icon">📞</div>
-    <h3>Acceder al sistema de teléfonos (3CX)</h3>
-    <p>Accede a tu sistema telefónico, correo de voz y configuraciones desde donde sea.</p>
-    <a class="btn" href="https://ibero.3cx.us" target="_blank" rel="noopener">
-      Abrir 3CX →
-    </a>
-  </div>
+<div class="card">
+<div class="icon">
+<img src="3cx.png">
+</div>
+<h3>Sistema telefónico (3CX)</h3>
+<p>Accede a tu extensión y correo de voz.</p>
+<a class="btn" href="https://ibero.3cx.us">Abrir →</a>
+</div>
 
-  <!-- 4. PASSWORD -->
-  <div class="card">
-    <div class="icon">🔑</div>
-    <h3>Restablecer tu contraseña</h3>
-    <p>¿La olvidaste o necesitas cambiarla? Hazlo aquí rápidamente.</p>
-    <a class="btn" href="https://passwordreset.microsoftonline.com/" target="_blank" rel="noopener">
-      Restablecer contraseña →
-    </a>
-  </div>
+<div class="card">
+<div class="icon">🔑</div>
+<h3>Restablecer contraseña</h3>
+<p>Cambia tu contraseña rápidamente.</p>
+<a class="btn" href="https://passwordreset.microsoftonline.com/">Reset →</a>
+</div>
 
-  <!-- 5. MFA -->
-  <div class="card">
-    <div class="icon">📲</div>
-    <h3>Configurar Authenticator (MFA)</h3>
-    <p>Usa Microsoft Authenticator para aprobaciones seguras en tu celular.</p>
-    <a class="btn" href="https://mysignins.microsoft.com/security-info" target="_blank" rel="noopener">
-      Administrar MFA →
-    </a>
-  </div>
+<div class="card">
+<div class="icon">📲</div>
+<h3>Configurar MFA</h3>
+<p>Activa la autenticación segura.</p>
+<a class="btn" href="https://mysignins.microsoft.com/">Configurar →</a>
+</div>
 
-  <!-- 6. GUIDES -->
-  <div class="card">
-    <div class="icon">📘</div>
-    <h3>Guías rápidas</h3>
-    <p>Guías sencillas para impresoras, Wi-Fi, Teams y más.</p>
-    <span class="tag">En progreso</span>
-    <a class="btn secondary" href="#" onclick="return false;">
-      Próximamente
-    </a>
-  </div>
+<div class="card">
+<div class="icon">📘</div>
+<h3>Guías</h3>
+<p>Próximamente.</p>
+</div>
 
 </div>
-      <p class="small" style="margin-top:14px;">
-        Consejo: si el restablecimiento falla, usualmente significa que tu información de seguridad no está configurada todavía.
-        Usa “Configurar Authenticator”.
-      </p>
-    </div>
 
-    <aside class="panel">
-      <h3 style="margin:0 0 6px;">Problemas comunes</h3>
-      <div class="side-list">
+</div>
 
-        <div class="side-item">
-          <div class="icon">🔒</div>
-          <div>
-            <b>¿Cuenta bloqueada?</b>
-            Intenta restablecer tu contraseña primero. Si aún no puedes entrar, déjanos saber.
-          </div>
-        </div>
+<!-- RIGHT -->
+<div class="panel">
+<h3>Problemas comunes</h3>
 
-        <div class="side-item">
-          <div class="icon">📵</div>
-          <div>
-            <b>¿Perdiste tu celular?</b>
-            Contáctanos para reiniciar tu MFA y ayudarte a registrar un nuevo teléfono.
-          </div>
-        </div>
+<div class="side-list">
 
-        <div class="side-item">
-          <div class="icon">🚫</div>
-          <div>
-            <b>¿No te llegan las notificaciones?</b>
-            Abre la app, revisa si tienes solicitudes pendientes y verifica que las notificaciones estén activadas.
-          </div>
-        </div>
+<div class="side-item">Cuenta bloqueada → Restablece contraseña</div>
+<div class="side-item">Sin notificaciones → Revisa MFA</div>
+<div class="side-item">Contraseña vencida → Cámbiala</div>
 
-        <div class="side-item">
-          <div class="icon">🕒</div>
-          <div>
-            <b>¿Contraseña vencida?</b>
-            Usa “Restablecer tu contraseña”. La nueva contraseña funciona con correo, Teams y todas las apps de Microsoft.
-          </div>
-        </div>
+</div>
 
-      </div>
-    </aside>
-  </section>
+</div>
 
-  <footer>
-    Equipo de IT – Ibero • Para asuntos urgentes llama a la ext. 987 • tickets@ibero.org
-  </footer>
+</div>
 
-</main>
+</div>
 
 </body>
 </html>
